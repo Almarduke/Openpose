@@ -1,0 +1,39 @@
+
+1.最简单的使用
+
+准备工作：在/usr/local/openpose/test下放入视频，mp4/avi格式最好
+如果在test下存在test.mp4，执行以下命令
+
+cd /usr/local/openpose
+./build/examples/openpose/openpose.bin \
+   --write_json test/outputJSON/ \
+   --display 0 \
+   --video "test/test.mp4" \
+   --write_video test/outputVideo.avi
+
+则test文件夹下会产生outputJSON文件夹（位置数据）以及outputVideo.avi（处理的结果）
+
+2.选项
+
+“--”后为选项，从上面简单应用我们可以看到下面这几个选项是基本的：
+--display 0 ：表示不把视频播放在服务器的视频播放器上，我们访问服务器时是没有图像界面的，这个选项不加会报错
+--video "{待处理视频路径}" ：可以是绝对路径或相对路径，存放着我们需要处理的视频
+--write_video {处理后视频路径} ：同理
+
+下面是一些常见可选的选项：
+--hand ：调用手部模型，可以识别视频的手部骨架（耗时显著增加）
+--face ：调用脸部模型，可以处理视频脸部关键点（耗时显著增加）
+--model_folder {模型文件夹路径} ：调用文件夹中的额外模型如上面的手部、脸部模型
+--write_json {JSON文件夹路径} ：会自动创建一个文件夹存放JSON格式的位置数据
+
+openpose也可以识别图像：
+--image_dir test/image --write_images test/output_image 
+如果在命令中附加了上面的选项，则是把/usr/local/openpose/test/image下的所有图像处理，结果图像存放在/usr/local/openpose/test/output_image文件夹下
+
+目前我们识别主要的还是人体的姿态姿势，如果处理视频的话用到基本的就可以了，有其他要求的话也可以加上“--hand”处理手部
+大家可以在/usr/local/openpose/test/下创建自己的文件夹用来测试使用
+
+这个网站给出了比较基本的使用方法：
+https://qiita.com/myoshimi/items/cf64c91cd22c516bb49b
+这个网站则给出了所有选项及意义：
+https://qiita.com/wada-n/items/e9e6653effc1e3d0c566
